@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Auth
+  accounts Account[]
+  sessions Session[]
+
+  // Health data sources
+  googleSheetSources GoogleSheetSource[]
+  appleHealthImports AppleHealthImport[]
+
+  // Health data
+  meals            Meal[]
+  sleepSessions    SleepSession[]
+  activities       Activity[]
+  circadianMetrics CircadianMetric[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model GoogleSheetSource {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  url       String
+  isActive  Boolean  @default(true)
+  lastSync  DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  importLogs ImportLog[]
+
+  @@map("google_sheet_sources")
+}
+
+model AppleHealthImport {
+  id           String   @id @default(cuid())
+  userId       String
+  fileName     String
+  fileSize     Int
+  importedAt   DateTime @default(now())
+  recordsCount Int      @default(0)
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  importLogs ImportLog[]
+
+  @@map("apple_health_imports")
+}
+
+model ImportLog {
+  id          String    @id @default(cuid())
+  userId      String
+  sourceType  String // "google_sheet" | "apple_health"
+  sourceId    String
+  status      String // "pending" | "processing" | "completed" | "failed"
+  recordsProcessed Int @default(0)
+  errorMessage String?
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  // Relations (optional foreign keys)
+  googleSheetSource GoogleSheetSource? @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  appleHealthImport AppleHealthImport? @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@map("import_logs")
+}
+
+model Meal {
+  id         String    @id @default(cuid())
+  userId     String
+  occurredAt DateTime
+  label      String?
+  notes      String?
+  photoUrl   String?
+  calories   Float?
+  source     String    @default("manual") // "manual" | "google_sheet" | "apple_health"
+  sourceId   String?
+  createdAt  DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, occurredAt])
+  @@map("meals")
+}
+
+model SleepSession {
+  id        String   @id @default(cuid())
+  userId    String
+  startAt   DateTime
+  endAt     DateTime
+  quality   Float? // 1-10 scale
+  source    String   @default("manual") // "manual" | "apple_health" | "google_sheet"
+  sourceId  String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, startAt])
+  @@map("sleep_sessions")
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String // "workout" | "walk" | "run" | etc.
+  startAt     DateTime
+  durationMin Int
+  intensity   String? // "low" | "medium" | "high"
+  calories    Float?
+  source      String   @default("manual") // "manual" | "apple_health" | "google_sheet"
+  sourceId    String?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, startAt])
+  @@map("activities")
+}
+
+model CircadianMetric {
+  id   String @id @default(cuid())
+  userId String
+  date DateTime @db.Date
+  
+  // CAD Score and components
+  cadScore          Float // Main Circadian Aligned Days score (0-100)
+  sleepScore        Float @default(0) // Sleep quality and timing score
+  mealTimingScore   Float @default(0) // Meal timing and eating window score
+  activityScore     Float @default(0) // Activity timing and balance score
+  consistencyScore  Float @default(0) // Day-to-day consistency score
+  
+  // Raw metrics for calculation
+  sleepDuration     Float? // Hours
+  sleepEfficiency   Float? // Percentage
+  bedtime           DateTime?
+  wakeTime          DateTime?
+  firstMealTime     DateTime?
+  lastMealTime      DateTime?
+  eatingWindowHours Float? // Hours between first and last meal
+  
+  // Metadata
+  calculatedAt DateTime @default(now())
+  version      String   @default("v0") // Algorithm version
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@map("circadian_metrics")
+}

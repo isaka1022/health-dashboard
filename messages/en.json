@@ -1,0 +1,212 @@
+{
+  "app": {
+    "title": "Circadian AI Dashboard",
+    "description": "Optimize your performance with AI-powered circadian rhythm analysis"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "dataSources": "Data Sources"
+  },
+  "home": {
+    "welcome": "Welcome to Circadian AI Dashboard",
+    "subtitle": "Optimize your performance with AI-powered circadian rhythm analysis",
+    "viewDashboard": "View Dashboard",
+    "features": {
+      "trackHealth": {
+        "title": "Track Health Data",
+        "description": "Import data from Google Sheets and Apple Health for comprehensive tracking."
+      },
+      "cadScore": {
+        "title": "CAD Score",
+        "description": "Get your daily Circadian Aligned Days score with actionable insights."
+      },
+      "aiRecommendations": {
+        "title": "AI Recommendations",
+        "description": "Receive personalized recommendations for optimal performance."
+      },
+      "weeklyReports": {
+        "title": "Weekly Reports",
+        "description": "Track your progress with detailed weekly analysis and trends."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Circadian AI Dashboard",
+    "refresh": "Refresh",
+    "noData": {
+      "title": "No Data Available",
+      "description": "Connect your data sources to start tracking your circadian rhythm.",
+      "connectButton": "Connect Data Source"
+    },
+    "cadScore": {
+      "title": "CAD Score",
+      "subtitle": "Your circadian alignment for today",
+      "goalAchieved": "🎯 Goal Achieved!",
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "needsWork": "Needs Work"
+    },
+    "scoreBreakdown": {
+      "title": "Score Breakdown",
+      "sleep": "Sleep",
+      "sleepDescription": "Duration, timing & quality",
+      "mealTiming": "Meal Timing",
+      "mealTimingDescription": "Eating window & schedule",
+      "activity": "Activity",
+      "activityDescription": "Exercise timing & duration",
+      "consistency": "Consistency",
+      "consistencyDescription": "Day-to-day regularity"
+    },
+    "healthMetrics": {
+      "title": "Today's Metrics",
+      "sleep": "Sleep",
+      "meals": "Meals",
+      "duration": "Duration",
+      "bedtime": "Bedtime",
+      "wakeTime": "Wake Time",
+      "efficiency": "Efficiency",
+      "firstMeal": "First Meal",
+      "lastMeal": "Last Meal",
+      "eatingWindow": "Eating Window",
+      "targets": {
+        "sleepDuration": "7-9 hours",
+        "bedtime": "9-11 PM",
+        "wakeTime": "6-8 AM",
+        "efficiency": "85%+",
+        "firstMeal": "6-10 AM",
+        "lastMeal": "Before 7 PM",
+        "eatingWindow": "10-12 hours"
+      },
+      "noData": "No data"
+    },
+    "weeklySummary": {
+      "title": "Weekly Summary",
+      "averageScore": "Average CAD Score",
+      "last7Days": "Last 7 days",
+      "cadAlignedDays": "CAD Aligned Days",
+      "scoreThreshold": "Score ≥ 80",
+      "weeklyGoalProgress": "Weekly Goal Progress",
+      "target": "Target: 80% of days with CAD ≥ 80",
+      "status": {
+        "excellent": "🎉 Excellent! You're hitting your circadian rhythm goals.",
+        "good": "📈 Good progress! Focus on consistency to reach your goal.",
+        "fair": "💪 Keep working! Small improvements add up over time.",
+        "poor": "🎯 Let's build better habits! Start with consistent sleep timing."
+      },
+      "updatedAgo": "Updated {time} ago",
+      "justNow": "Just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago"
+    }
+  },
+  "dataSources": {
+    "title": "Data Sources",
+    "subtitle": "Connect your health data sources",
+    "googleSheets": {
+      "title": "Google Sheets",
+      "sourceName": "Source Name",
+      "sourceNamePlaceholder": "My Health Data",
+      "url": "Google Sheets URL",
+      "urlPlaceholder": "https://docs.google.com/spreadsheets/d/...",
+      "urlHint": "Make sure the sheet is publicly viewable",
+      "addButton": "Add Google Sheet",
+      "adding": "Adding...",
+      "expectedColumns": "Expected Columns:",
+      "columns": [
+        "• Date (YYYY-MM-DD)",
+        "• Sleep Duration, Bedtime, Wake Time",
+        "• First Meal, Last Meal",
+        "• Exercise Duration, Exercise Type"
+      ]
+    },
+    "appleHealth": {
+      "title": "Apple Health Import",
+      "upload": "Upload Apple Health Data",
+      "processing": "Processing...",
+      "dragDrop": "Drag and drop your Apple Health export file here, or click to select",
+      "processingDescription": "Parsing your health data and importing records...",
+      "chooseFile": "Choose File",
+      "howToExport": "How to Export from Apple Health:",
+      "exportSteps": [
+        "Open the Health app on your iPhone",
+        "Tap your profile picture in the top right",
+        "Scroll down and tap \"Export All Health Data\"",
+        "Wait for the export to complete",
+        "Share the export.xml file to this device"
+      ],
+      "supportedData": "Supported Data:",
+      "dataTypes": [
+        "• Sleep analysis (bedtime, wake time, duration)",
+        "• Workout sessions (type, duration, calories)",
+        "• Heart rate measurements",
+        "• Daily step counts",
+        "• Active energy burned"
+      ],
+      "privacy": "Privacy & Security:",
+      "privacyDescription": "Your health data is processed locally and stored securely. The uploaded file is deleted immediately after processing."
+    },
+    "setupInstructions": {
+      "title": "Setup Instructions",
+      "googleSheetsSetup": "Setting up Google Sheets:",
+      "googleSheetsSteps": [
+        "Create a Google Sheet with your health data",
+        "Make sure the sheet is publicly viewable (Share → Anyone with the link can view)",
+        "Use the expected column names for best results",
+        "Copy the full URL and paste it above"
+      ],
+      "sampleTemplate": "Sample Sheet Template:"
+    },
+    "notifications": {
+      "success": "Success",
+      "error": "Error",
+      "validation": {
+        "nameAndUrlRequired": "Please provide both name and URL",
+        "invalidFileType": "Please upload an Apple Health export XML file or ZIP archive.",
+        "fileTooLarge": "Please upload a file smaller than 50MB."
+      },
+      "googleSheetsAdded": "Google Sheet source added successfully",
+      "syncStarted": "Sync Started",
+      "syncDescription": "Your data is being imported. Check the dashboard in a few moments.",
+      "dataImported": "Data Imported",
+      "appleHealthImported": "Apple Health data has been imported. Check your dashboard for updated CAD scores.",
+      "uploadSuccessful": "Upload Successful",
+      "uploadFailed": "Upload Failed",
+      "recordsProcessed": "Processed {count} health records from your Apple Health data."
+    }
+  },
+  "auth": {
+    "welcome": "Welcome to Circadian AI",
+    "subtitle": "Sign in to track your circadian rhythm",
+    "continueWithGoogle": "Continue with Google",
+    "signingIn": "Signing in...",
+    "termsAndPrivacy": "By signing in, you agree to our",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "tryAgain": "Try Again",
+    "refresh": "Refresh",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export",
+    "import": "Import",
+    "settings": "Settings",
+    "help": "Help",
+    "about": "About",
+    "contact": "Contact",
+    "logout": "Logout"
+  }
+}

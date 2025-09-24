@@ -1,0 +1,212 @@
+{
+  "app": {
+    "title": "サーカディアンAIダッシュボード",
+    "description": "AI搭載のサーカディアンリズム解析であなたのパフォーマンスを最適化"
+  },
+  "navigation": {
+    "dashboard": "ダッシュボード",
+    "dataSources": "データソース"
+  },
+  "home": {
+    "welcome": "サーカディアンAIダッシュボードへようこそ",
+    "subtitle": "AI搭載のサーカディアンリズム解析であなたのパフォーマンスを最適化",
+    "viewDashboard": "ダッシュボードを見る",
+    "features": {
+      "trackHealth": {
+        "title": "健康データの追跡",
+        "description": "GoogleスプレッドシートとApple Healthからデータをインポートして包括的な追跡を行います。"
+      },
+      "cadScore": {
+        "title": "CADスコア",
+        "description": "毎日のサーカディアン同調度（CAD）スコアと実行可能な洞察を取得します。"
+      },
+      "aiRecommendations": {
+        "title": "AI推奨事項",
+        "description": "最適なパフォーマンスのためのパーソナライズされた推奨事項を受け取ります。"
+      },
+      "weeklyReports": {
+        "title": "週次レポート",
+        "description": "詳細な週次分析とトレンドで進捗を追跡します。"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "サーカディアンAIダッシュボード",
+    "refresh": "更新",
+    "noData": {
+      "title": "データがありません",
+      "description": "サーカディアンリズムの追跡を開始するには、データソースを接続してください。",
+      "connectButton": "データソースを接続"
+    },
+    "cadScore": {
+      "title": "CADスコア",
+      "subtitle": "今日のサーカディアン同調度",
+      "goalAchieved": "🎯 目標達成！",
+      "excellent": "優秀",
+      "good": "良好",
+      "fair": "普通",
+      "needsWork": "要改善"
+    },
+    "scoreBreakdown": {
+      "title": "スコア内訳",
+      "sleep": "睡眠",
+      "sleepDescription": "時間、タイミング、質",
+      "mealTiming": "食事タイミング",
+      "mealTimingDescription": "食事時間と間隔",
+      "activity": "活動",
+      "activityDescription": "運動のタイミングと時間",
+      "consistency": "一貫性",
+      "consistencyDescription": "日々の規則性"
+    },
+    "healthMetrics": {
+      "title": "今日の指標",
+      "sleep": "睡眠",
+      "meals": "食事",
+      "duration": "時間",
+      "bedtime": "就寝時刻",
+      "wakeTime": "起床時刻",
+      "efficiency": "効率",
+      "firstMeal": "初回食事",
+      "lastMeal": "最終食事",
+      "eatingWindow": "食事時間帯",
+      "targets": {
+        "sleepDuration": "7-9時間",
+        "bedtime": "午後9-11時",
+        "wakeTime": "午前6-8時",
+        "efficiency": "85%以上",
+        "firstMeal": "午前6-10時",
+        "lastMeal": "午後7時前",
+        "eatingWindow": "10-12時間"
+      },
+      "noData": "データなし"
+    },
+    "weeklySummary": {
+      "title": "週次サマリー",
+      "averageScore": "平均CADスコア",
+      "last7Days": "過去7日間",
+      "cadAlignedDays": "CAD同調日数",
+      "scoreThreshold": "スコア ≥ 80",
+      "weeklyGoalProgress": "週間目標進捗",
+      "target": "目標：CAD ≥ 80の日が80%",
+      "status": {
+        "excellent": "🎉 素晴らしい！サーカディアンリズムの目標を達成しています。",
+        "good": "📈 良い進捗です！目標達成のために一貫性に注力しましょう。",
+        "fair": "💪 頑張りましょう！小さな改善が積み重なります。",
+        "poor": "🎯 より良い習慣を築きましょう！一貫した睡眠時間から始めましょう。"
+      },
+      "updatedAgo": "{time}前に更新",
+      "justNow": "たった今",
+      "minutesAgo": "{minutes}分前",
+      "hoursAgo": "{hours}時間前"
+    }
+  },
+  "dataSources": {
+    "title": "データソース",
+    "subtitle": "健康データソースを接続",
+    "googleSheets": {
+      "title": "Googleスプレッドシート",
+      "sourceName": "ソース名",
+      "sourceNamePlaceholder": "私の健康データ",
+      "url": "GoogleスプレッドシートURL",
+      "urlPlaceholder": "https://docs.google.com/spreadsheets/d/...",
+      "urlHint": "シートが公開表示可能であることを確認してください",
+      "addButton": "Googleスプレッドシートを追加",
+      "adding": "追加中...",
+      "expectedColumns": "期待される列：",
+      "columns": [
+        "• Date（YYYY-MM-DD）",
+        "• Sleep Duration、Bedtime、Wake Time",
+        "• First Meal、Last Meal",
+        "• Exercise Duration、Exercise Type"
+      ]
+    },
+    "appleHealth": {
+      "title": "Apple Healthインポート",
+      "upload": "Apple Healthデータをアップロード",
+      "processing": "処理中...",
+      "dragDrop": "Apple Health エクスポートファイルをここにドラッグ&ドロップするか、クリックして選択",
+      "processingDescription": "あなたの健康データを解析してレコードをインポートしています...",
+      "chooseFile": "ファイルを選択",
+      "howToExport": "Apple Healthからエクスポートする方法：",
+      "exportSteps": [
+        "iPhoneでヘルスアプリを開く",
+        "右上のプロフィール写真をタップ",
+        "下にスクロールして「すべてのヘルスデータを書き出す」をタップ",
+        "エクスポートが完了するまで待つ",
+        "export.xmlファイルをこのデバイスに共有"
+      ],
+      "supportedData": "サポートされるデータ：",
+      "dataTypes": [
+        "• 睡眠分析（就寝時刻、起床時刻、時間）",
+        "• ワークアウトセッション（種類、時間、カロリー）",
+        "• 心拍数測定",
+        "• 日次歩数",
+        "• 消費アクティブエネルギー"
+      ],
+      "privacy": "プライバシーとセキュリティ：",
+      "privacyDescription": "あなたの健康データはローカルで処理され、安全に保存されます。アップロードされたファイルは処理後すぐに削除されます。"
+    },
+    "setupInstructions": {
+      "title": "セットアップ手順",
+      "googleSheetsSetup": "Googleスプレッドシートの設定：",
+      "googleSheetsSteps": [
+        "健康データを含むGoogleスプレッドシートを作成",
+        "シートを公開表示可能にする（共有 → リンクを知っている全員が閲覧可能）",
+        "最良の結果を得るために期待される列名を使用",
+        "完全なURLをコピーして上記に貼り付け"
+      ],
+      "sampleTemplate": "サンプルシートテンプレート："
+    },
+    "notifications": {
+      "success": "成功",
+      "error": "エラー",
+      "validation": {
+        "nameAndUrlRequired": "名前とURLの両方を入力してください",
+        "invalidFileType": "Apple Health エクスポートXMLファイルまたはZIPアーカイブをアップロードしてください。",
+        "fileTooLarge": "50MB未満のファイルをアップロードしてください。"
+      },
+      "googleSheetsAdded": "Googleスプレッドシートソースが正常に追加されました",
+      "syncStarted": "同期開始",
+      "syncDescription": "データをインポートしています。しばらくしてからダッシュボードを確認してください。",
+      "dataImported": "データがインポートされました",
+      "appleHealthImported": "Apple Healthデータがインポートされました。更新されたCADスコアについてはダッシュボードを確認してください。",
+      "uploadSuccessful": "アップロード成功",
+      "uploadFailed": "アップロード失敗",
+      "recordsProcessed": "Apple Healthデータから{count}件の健康記録を処理しました。"
+    }
+  },
+  "auth": {
+    "welcome": "サーカディアンAIへようこそ",
+    "subtitle": "サーカディアンリズムを追跡するためにサインイン",
+    "continueWithGoogle": "Googleでログイン",
+    "signingIn": "サインイン中...",
+    "termsAndPrivacy": "サインインすることで、以下に同意したことになります",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "tryAgain": "再試行",
+    "refresh": "更新",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "submit": "送信",
+    "search": "検索",
+    "filter": "フィルタ",
+    "sort": "並び替え",
+    "export": "エクスポート",
+    "import": "インポート",
+    "settings": "設定",
+    "help": "ヘルプ",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "logout": "ログアウト"
+  }
+}
