@@ -7,11 +7,11 @@ export default createMiddleware({
   // Used when no locale matches
   defaultLocale: 'ja',
   
-  // Never prefix the default locale
-  localePrefix: 'as-needed'
+  // Always use the locale prefix to avoid confusion
+  localePrefix: 'always'
 })
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', '/(ja|en)/:path*', '/((?!_next|_vercel|.*\\..*).*)']
+  matcher: ['/', '/(ja|en)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
 }
