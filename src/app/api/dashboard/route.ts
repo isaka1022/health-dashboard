@@ -21,6 +21,17 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    // Ensure user exists
+    await prisma.user.upsert({
+      where: { id: userId },
+      update: {},
+      create: {
+        id: userId,
+        name: 'Test User',
+        email: 'test@example.com',
+      },
+    })
+
     // Use provided date or today
     const targetDate = dateParam ? new Date(dateParam) : new Date()
     targetDate.setHours(0, 0, 0, 0)
