@@ -101,13 +101,13 @@ export function WeeklySummary({ weekly, lastUpdated }: WeeklySummaryProps) {
           <div className="p-3 bg-blue-50 rounded-lg">
             <div className="text-sm">
               {cadPercentage >= 80 ? (
-                <span className="text-green-700">🎉 Excellent! You're hitting your circadian rhythm goals.</span>
+                <span className="text-green-700">🎉 Excellent! You&apos;re hitting your circadian rhythm goals.</span>
               ) : cadPercentage >= 60 ? (
                 <span className="text-yellow-700">📈 Good progress! Focus on consistency to reach your goal.</span>
               ) : cadPercentage >= 40 ? (
                 <span className="text-orange-700">💪 Keep working! Small improvements add up over time.</span>
               ) : (
-                <span className="text-red-700">🎯 Let's build better habits! Start with consistent sleep timing.</span>
+                <span className="text-red-700">🎯 Let&apos;s build better habits! Start with consistent sleep timing.</span>
               )}
             </div>
           </div>

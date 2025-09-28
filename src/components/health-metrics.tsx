@@ -87,7 +87,7 @@ export function HealthMetrics({ rawMetrics }: HealthMetricsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Today's Metrics</CardTitle>
+        <CardTitle>Today&apos;s Metrics</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">

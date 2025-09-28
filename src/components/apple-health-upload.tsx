@@ -160,7 +160,7 @@ export function AppleHealthUpload({ userId, onUploadComplete }: AppleHealthUploa
             <ol className="text-xs text-gray-600 space-y-1 list-decimal list-inside">
               <li>Open the Health app on your iPhone</li>
               <li>Tap your profile picture in the top right</li>
-              <li>Scroll down and tap "Export All Health Data"</li>
+              <li>Scroll down and tap &quot;Export All Health Data&quot;</li>
               <li>Wait for the export to complete</li>
               <li>Share the export.xml file to this device</li>
             </ol>

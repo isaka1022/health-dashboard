@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link } from '@/navigation'
+import { usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 
@@ -22,7 +22,7 @@ export function Navigation() {
           href={item.href}
           className={cn(
             'text-sm font-medium transition-colors hover:text-primary',
-            pathname.endsWith(item.href)
+            pathname === item.href
               ? 'text-foreground'
               : 'text-muted-foreground'
           )}

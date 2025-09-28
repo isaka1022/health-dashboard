@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation'
 import { getRequestConfig } from 'next-intl/server'
 
-export const locales = ['ja', 'en']
+export const locales = ['ja']
 
 export default getRequestConfig(async ({ locale }) => {
   // Validate that the incoming locale parameter is valid
-  if (!locale || !locales.includes(locale as any)) {
-    locale = 'ja'
-  }
+  locale = 'ja'
 
   return {
     locale: locale as string,

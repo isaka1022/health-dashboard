@@ -8,7 +8,7 @@ import { WeeklySummary } from '@/components/weekly-summary'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Navigation } from '@/components/navigation'
-import Link from 'next/link'
+import { Link } from '@/navigation'
 
 interface DashboardData {
   cadScore: number
