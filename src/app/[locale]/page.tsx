@@ -1,10 +1,15 @@
-import { useTranslations } from 'next-intl'
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
+import { Link } from '@/navigation'
 import { Button } from '@/components/ui/button'
 import { LanguageSwitcher } from '@/components/language-switcher'
 
-export default function HomePage() {
-  const t = useTranslations()
+export default async function HomePage({
+  params
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const t = await getTranslations()
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
