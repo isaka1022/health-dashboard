@@ -172,12 +172,18 @@ export default function SourcesPage() {
           <CardContent>
             <div className="space-y-4">
               <div>
-                <h4 className="font-medium mb-2">Setting up Google Sheets:</h4>
+                <h4 className="font-medium mb-2">Google シートの設定方法：</h4>
                 <ol className="list-decimal list-inside text-sm text-gray-600 space-y-1">
-                  <li>Create a Google Sheet with your health data</li>
-                  <li>Make sure the sheet is publicly viewable (Share → Anyone with the link can view)</li>
-                  <li>Use the expected column names for best results</li>
-                  <li>Copy the full URL and paste it above</li>
+                  <li>健康データを含むGoogleシートを作成</li>
+                  <li><strong className="text-red-600">重要：</strong> シートの共有設定を「リンクを知っている全員が閲覧可能」に変更
+                    <ul className="list-disc list-inside ml-4 mt-1">
+                      <li>右上の「共有」ボタンをクリック</li>
+                      <li>「制限付き」を「リンクを知っている全員」に変更</li>
+                      <li>「閲覧者」権限で十分です</li>
+                    </ul>
+                  </li>
+                  <li>複数のシートタブがある場合、正しいタブを開いてURLをコピー（gid=XXXが含まれます）</li>
+                  <li>完全なURLをコピーして上記に貼り付け</li>
                 </ol>
               </div>
               
