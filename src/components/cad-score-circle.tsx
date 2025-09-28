@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 interface CADScoreCircleProps {
   score: number
   size?: 'sm' | 'md' | 'lg'
@@ -7,6 +9,7 @@ interface CADScoreCircleProps {
 }
 
 export function CADScoreCircle({ score, size = 'md', showLabel = true }: CADScoreCircleProps) {
+  const t = useTranslations('dashboard.cadScore')
   const sizeClasses = {
     sm: 'w-16 h-16',
     md: 'w-24 h-24',
@@ -79,11 +82,11 @@ export function CADScoreCircle({ score, size = 'md', showLabel = true }: CADScor
       
       {showLabel && (
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-900">CAD Score</p>
+          <p className="text-sm font-medium text-gray-900">{t('title')}</p>
           <p className="text-xs text-gray-500">
-            {score >= 80 ? 'Excellent' : 
-             score >= 60 ? 'Good' : 
-             score >= 40 ? 'Fair' : 'Needs Work'}
+            {score >= 80 ? t('excellent') : 
+             score >= 60 ? t('good') : 
+             score >= 40 ? t('fair') : t('needsWork')}
           </p>
         </div>
       )}

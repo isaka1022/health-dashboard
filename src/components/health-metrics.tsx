@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface HealthMetricsProps {
@@ -15,65 +16,67 @@ interface HealthMetricsProps {
 }
 
 export function HealthMetrics({ rawMetrics }: HealthMetricsProps) {
+  const t = useTranslations('dashboard.healthMetrics')
+  
   const formatTime = (timeString?: string) => {
-    if (!timeString) return 'No data'
+    if (!timeString) return t('noData')
     try {
       const date = new Date(timeString)
-      return date.toLocaleTimeString('en-US', { 
+      return date.toLocaleTimeString('ja-JP', { 
         hour: 'numeric', 
         minute: '2-digit',
-        hour12: true 
+        hour12: false
       })
     } catch {
-      return 'Invalid time'
+      return t('noData')
     }
   }
 
   const formatDuration = (hours?: number) => {
-    if (!hours) return 'No data'
+    if (!hours) return t('noData')
     const h = Math.floor(hours)
     const m = Math.round((hours - h) * 60)
-    return `${h}h ${m}m`
+    return `${h}時間${m}分`
   }
 
   const metrics = [
     {
-      category: 'Sleep',
+      category: t('sleep'),
       items: [
         {
-          label: 'Duration',
+          label: t('duration'),
           value: formatDuration(rawMetrics.sleepDuration),
-          target: '7-9 hours'
+          target: t('targets.sleepDuration')
         },
         {
-          label: 'Bedtime',
+          label: t('bedtime'),
           value: formatTime(rawMetrics.bedtime),
-          target: '9-11 PM'
+          target: t('targets.bedtime')
         },
         {
-          label: 'Wake Time',
+          label: t('wakeTime'),
           value: formatTime(rawMetrics.wakeTime),
-          target: '6-8 AM'
+          target: t('targets.wakeTime')
         },
         {
-          label: 'Efficiency',
-          value: rawMetrics.sleepEfficiency ? `${Math.round(rawMetrics.sleepEfficiency)}%` : 'No data',
-          target: '85%+'
+          label: t('efficiency'),
+          value: rawMetrics.sleepEfficiency ? `${Math.round(rawMetrics.sleepEfficiency)}%` : t('noData'),
+          target: t('targets.efficiency')
         }
       ]
     },
     {
-      category: 'Meals',
+      category: t('meals'),
       items: [
         {
-          label: 'First Meal',
+          label: t('firstMeal'),
           value: formatTime(rawMetrics.firstMealTime),
-          target: '6-10 AM'
+          target: t('targets.firstMeal')
         },
         {
-          label: 'Last Meal',
+          label: t('lastMeal'),
           value: formatTime(rawMetrics.lastMealTime),
-          target: 'Before 7 PM'
+          target: t('targets.lastMeal')
         },
         {
           label: 'Eating Window',

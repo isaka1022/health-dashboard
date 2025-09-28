@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { CADScoreCircle } from '@/components/cad-score-circle'
 import { ScoreBreakdown } from '@/components/score-breakdown'
 import { HealthMetrics } from '@/components/health-metrics'
@@ -43,6 +44,7 @@ interface DashboardData {
 }
 
 export default function DashboardPage() {
+  const t = useTranslations()
   const [data, setData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -59,13 +61,13 @@ export default function DashboardPage() {
       const response = await fetch(`/api/dashboard?userId=${mockUserId}&date=${selectedDate}`)
       
       if (!response.ok) {
-        throw new Error('Failed to fetch dashboard data')
+        throw new Error(t('dashboard.error.fetchFailed') || 'Failed to fetch dashboard data')
       }
       
       const result = await response.json()
       setData(result)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error')
+      setError(err instanceof Error ? err.message : t('common.error'))
     } finally {
       setLoading(false)
     }
@@ -82,7 +84,7 @@ export default function DashboardPage() {
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString)
-      return date.toLocaleDateString('en-US', { 
+      return date.toLocaleDateString('ja-JP', { 
         weekday: 'long',
         year: 'numeric',
         month: 'long',
@@ -98,7 +100,7 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your dashboard...</p>
+          <p className="text-gray-600">{t('common.loading')}</p>
         </div>
       </div>
     )
@@ -109,12 +111,12 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle className="text-red-600">Error</CardTitle>
+            <CardTitle className="text-red-600">{t('common.error')}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 mb-4">{error}</p>
             <Button onClick={handleRefresh} className="w-full">
-              Try Again
+              {t('common.tryAgain')}
             </Button>
           </CardContent>
         </Card>
@@ -125,7 +127,7 @@ export default function DashboardPage() {
   if (!data) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <p className="text-gray-600">No data available</p>
+        <p className="text-gray-600">{t('dashboard.noData.description')}</p>
       </div>
     )
   }
@@ -138,7 +140,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Circadian AI Dashboard</h1>
+                <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.title')}</h1>
                 <p className="text-sm text-gray-600">{formatDate(selectedDate)}</p>
               </div>
               <Navigation />
@@ -151,7 +153,7 @@ export default function DashboardPage() {
                 className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <Button onClick={handleRefresh} variant="outline" size="sm">
-                Refresh
+                {t('dashboard.refresh')}
               </Button>
             </div>
           </div>
@@ -168,12 +170,12 @@ export default function DashboardPage() {
                   <span className="text-2xl">📊</span>
                 </div>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No Data Available</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">{t('dashboard.noData.title')}</h3>
               <p className="text-gray-600 mb-4">
-                Connect your data sources to start tracking your circadian rhythm.
+                {t('dashboard.noData.description')}
               </p>
               <Link href="/sources">
-                <Button>Connect Data Source</Button>
+                <Button>{t('dashboard.noData.connectButton')}</Button>
               </Link>
             </CardContent>
           </Card>
@@ -186,11 +188,11 @@ export default function DashboardPage() {
                   <CADScoreCircle score={data.cadScore} size="lg" />
                   <div className="mt-4 space-y-2">
                     <p className="text-sm text-gray-600">
-                      Your circadian alignment for today
+                      {t('dashboard.cadScore.subtitle')}
                     </p>
                     {data.cadScore >= 80 && (
                       <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        🎯 Goal Achieved!
+                        {t('dashboard.cadScore.goalAchieved')}
                       </div>
                     )}
                   </div>

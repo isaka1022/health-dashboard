@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface ScoreBreakdownProps {
@@ -18,33 +19,35 @@ interface ScoreBreakdownProps {
 }
 
 export function ScoreBreakdown({ breakdown, trends }: ScoreBreakdownProps) {
+  const t = useTranslations('dashboard.scoreBreakdown')
+  
   const categories = [
     {
-      name: 'Sleep',
+      name: t('sleep'),
       score: breakdown.sleepScore,
       trend: trends?.sleepScore || 0,
-      description: 'Duration, timing & quality',
+      description: t('sleepDescription'),
       weight: '40%'
     },
     {
-      name: 'Meal Timing',
+      name: t('mealTiming'),
       score: breakdown.mealTimingScore,
       trend: trends?.mealTimingScore || 0,
-      description: 'Eating window & schedule',
+      description: t('mealTimingDescription'),
       weight: '30%'
     },
     {
-      name: 'Activity',
+      name: t('activity'),
       score: breakdown.activityScore,
       trend: trends?.activityScore || 0,
-      description: 'Exercise timing & duration',
+      description: t('activityDescription'),
       weight: '20%'
     },
     {
-      name: 'Consistency',
+      name: t('consistency'),
       score: breakdown.consistencyScore,
       trend: trends?.cadScore || 0,
-      description: 'Day-to-day regularity',
+      description: t('consistencyDescription'),
       weight: '10%'
     }
   ]
@@ -71,7 +74,7 @@ export function ScoreBreakdown({ breakdown, trends }: ScoreBreakdownProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Score Breakdown</CardTitle>
+        <CardTitle>{t('title')}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

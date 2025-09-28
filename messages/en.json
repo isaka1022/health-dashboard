@@ -33,6 +33,9 @@
   "dashboard": {
     "title": "Circadian AI Dashboard",
     "refresh": "Refresh",
+    "error": {
+      "fetchFailed": "Failed to fetch dashboard data"
+    },
     "noData": {
       "title": "No Data Available",
       "description": "Connect your data sources to start tracking your circadian rhythm.",
