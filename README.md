@@ -116,7 +116,7 @@ Open [http://localhost:3000](http://localhost:3000).
    | Wake Time | HH:MM | 06:30 |
    | First Meal | HH:MM | 08:00 |
    | Last Meal | HH:MM | 19:30 |
-   | Exercise Duration | hours (decimal) | 1.0 |
+   | Exercise Duration | minutes (integer) | 60 |
    | Exercise Type | text | Running |
 
 2. Share the sheet as **Anyone with the link → Viewer**
@@ -142,6 +142,74 @@ src/
 │   └── prisma.ts               # Prisma client singleton
 └── types/
 ```
+
+---
+
+## How the CAD Score Works
+
+The CAD score is a weighted composite of four sub-scores, each 0–100, combined as:
+
+```
+CAD = sleep × 0.4 + meal_timing × 0.3 + activity × 0.2 + consistency × 0.1
+```
+
+### Sleep sub-score (40% weight)
+
+| Criterion | Points |
+|-----------|--------|
+| Duration 7–9 h | 40 |
+| Duration 6–10 h | 30 |
+| Duration 5–11 h | 20 |
+| Other | 10 |
+| Bedtime 9–11 PM | 30 |
+| Bedtime 8 PM | 20 |
+| Other | 10 |
+| Sleep quality (0–10 scale, if available) | 0–30 |
+
+### Meal timing sub-score (30% weight)
+
+| Criterion | Points |
+|-----------|--------|
+| First meal 6–10 AM | 30 |
+| First meal 5 AM–12 PM | 20 |
+| Other | 10 |
+| Eating window 10–12 h | 40 |
+| Eating window 8–14 h | 30 |
+| Eating window 6–16 h | 20 |
+| Other | 10 |
+| Last meal ≤ 7 PM | 30 |
+| Last meal ≤ 8 PM | 20 |
+| Other | 10 |
+
+### Activity sub-score (20% weight)
+
+| Criterion | Points |
+|-----------|--------|
+| Total duration 30–90 min | 50 |
+| Total duration 15–120 min | 35 |
+| Any activity recorded | 20 |
+| Activity in morning or afternoon (6 AM–6 PM) | 50 |
+| Activity only in evening/night | 25 |
+
+### Consistency sub-score (10% weight)
+
+Calculated from bedtime and wake-time variance over the previous 7 days.
+
+| Variance (hours, SD) | Points (each of bedtime / wake time) |
+|----------------------|--------------------------------------|
+| ≤ 1 h | 50 |
+| ≤ 2 h | 35 |
+| ≤ 3 h | 20 |
+| > 3 h | 10 |
+
+Requires at least 3 prior days of data; defaults to 50 with insufficient history.
+
+### Scientific basis
+
+The scoring thresholds reflect current evidence on circadian alignment and cardiometabolic health:
+
+- Martin ZT et al. (2026). "From light and activity to risk: circadian alignment as an emerging wearable biomarker." *Eur J Prev Cardiol*. [DOI: 10.1093/eurjpc/zwag026](https://doi.org/10.1093/eurjpc/zwag026)
+- Baron KG et al. (2016). "Circadian timing and alignment in healthy adults: associations with BMI, social jetlag and sleep." *Int J Obes*. [DOI: 10.1038/ijo.2016.194](https://doi.org/10.1038/ijo.2016.194)
 
 ---
 
