@@ -125,7 +125,7 @@ export class CADCalculator {
     const bedtimeHour = new Date(relevantSleep.startAt).getHours()
     if (bedtimeHour >= 21 && bedtimeHour <= 23) {
       score += 30
-    } else if (bedtimeHour >= 20 || bedtimeHour <= 1) {
+    } else if (bedtimeHour === 20) {
       score += 20
     } else {
       score += 10

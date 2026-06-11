@@ -211,7 +211,7 @@ export async function POST(
             },
             update: {
               type: activityData.exerciseType,
-              durationMin: Math.round(activityData.exerciseDuration * 60), // Convert hours to minutes
+              durationMin: Math.round(activityData.exerciseDuration), // Already in minutes
               source: 'google_sheet',
               sourceId: source.id,
             },
@@ -219,7 +219,7 @@ export async function POST(
               userId: source.userId,
               type: activityData.exerciseType,
               startAt,
-              durationMin: Math.round(activityData.exerciseDuration * 60),
+              durationMin: Math.round(activityData.exerciseDuration),
               source: 'google_sheet',
               sourceId: source.id,
             },
