@@ -213,6 +213,29 @@ The scoring thresholds reflect current evidence on circadian alignment and cardi
 
 ---
 
+## Roadmap
+
+### Now
+
+- Remove NextAuth scaffolding and replace with a simple fixed demo-user session (eliminates `next-auth`, `@next-auth/prisma-adapter`, Account/Session/VerificationToken models)
+- Persist steps and resting heart rate from Apple Health imports (parser already extracts them; the sync route discards them)
+- Show a clear error in the UI when a ZIP archive is uploaded instead of a CSV
+
+### Next
+
+- Health Auto Export webhook receiver endpoint (eliminate manual CSV upload)
+- Wire up the CAD daily breakdown hover (score-breakdown component is not connected to the API)
+- Fix ImportLog foreign-key design (current schema causes constraint errors on insert)
+- Correct Google Sheets steps-based activity duration (currently hardcoded to 60 min regardless of step count)
+
+### Later
+
+- Additional metrics: HRV, resting heart rate trend, body weight
+- Academic interdaily stability (IS) and intradaily variability (IV) indices
+- Home Assistant / MQTT integration for real-time data push
+
+---
+
 ## Known Limitations / Security Notes
 
 - **No real authentication.** The dashboard auto-creates and logs in as a fixed `test@example.com` demo user. Anyone who can reach the server can read and modify all data.
