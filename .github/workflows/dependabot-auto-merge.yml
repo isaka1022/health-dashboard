@@ -1,0 +1,63 @@
+name: Dependabot auto-merge
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  verify:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--max-old-space-size=6144"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: "npm"
+      # Dependabot's regenerated lockfile sometimes omits optional/transitive
+      # deps (e.g. @swc/helpers), which makes the strict `npm ci` below fail.
+      # Recompute the lockfile (no node_modules touched) and push the fix so the
+      # PR can pass and auto-merge. Pushes via GITHUB_TOKEN don't retrigger CI,
+      # so this runs once with no loop.
+      - name: Sync lockfile
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          if ! git diff --quiet package-lock.json; then
+            git config user.name "dependabot[bot]"
+            git config user.email "49699333+dependabot[bot]@users.noreply.github.com"
+            git commit -am "chore(deps): sync package-lock.json"
+            git push
+          fi
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+
+  auto-merge:
+    needs: verify
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v3
+
+      - name: Merge patch & minor updates
+        if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
+        run: |
+          for attempt in 1 2 3; do
+            if gh pr merge --squash "$PR_URL"; then exit 0; fi
+            echo "merge attempt $attempt failed; retrying in 15s"
+            sleep 15
+          done
+          exit 1
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
