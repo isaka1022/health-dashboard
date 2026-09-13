@@ -7,12 +7,12 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     groups:
-      security:
-        applies-to: security-updates
-        patterns:
-          - "*"
       minor-and-patch:
         applies-to: version-updates
         update-types:
           - "minor"
           - "patch"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
