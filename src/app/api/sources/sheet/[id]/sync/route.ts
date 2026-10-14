@@ -4,10 +4,10 @@ import { GoogleSheetsImporter } from '@/lib/google-sheets'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const sourceId = params.id
+    const { id: sourceId } = await params
 
     // Get the sheet source
     const source = await prisma.googleSheetSource.findUnique({
